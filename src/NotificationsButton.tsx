@@ -21,7 +21,9 @@ export default function NotificationsButton({
         cursor: "pointer",
       }}
       onClick={() => {
+        console.log("Is panel Open: ", isPanelOpen);
         if (isPanelOpen) {
+          console.log("Dismissing!");
           dismissPanel();
         }
 

@@ -1,3 +1,4 @@
+import "./styles.css";
 import Header from "./Header";
 import PageContainer from "./PageContainer";
 import { useBoolean } from "@fluentui/react-hooks";
@@ -11,6 +12,7 @@ export default function App() {
       style={{
         height: "100vh",
         width: "100%",
+        overflow: "hidden",
       }}
     >
       <Header

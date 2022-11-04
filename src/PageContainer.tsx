@@ -5,6 +5,8 @@ import { Customizer } from "@fluentui/react/lib/Utilities";
 import { Panel } from "@fluentui/react/lib/Panel";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
 
+const PANEL_CONTAINER_ID = "panel_container_id";
+
 interface IPageContainerProps {
   dismissPanel: () => void;
   isPanelOpen: boolean;
@@ -17,7 +19,7 @@ export default function PageContainer({
   dismissPanel,
   ...props
 }: IPageContainerProps) {
-  const layerHostId = useId("layerHost");
+  const layerHostId = useId(PANEL_CONTAINER_ID);
   const layerProps: ILayerProps = { hostId: layerHostId };
 
   const scopedSettings = { Layer: layerProps };
@@ -30,22 +32,20 @@ export default function PageContainer({
       }}
       {...props}
     >
-      <Customizer scopedSettings={scopedSettings}>
-        {isPanelOpen && (
-          <Panel
-            isOpen={true}
-            headerText="Notifications panel"
-            focusTrapZoneProps={{
-              isClickableOutsideFocusTrap: true,
-              forceFocusInsideTrap: false,
-            }}
-            onDismiss={dismissPanel}
-            isLightDismiss={true}
-          >
-            TODO
-          </Panel>
-        )}
-      </Customizer>
+      <Panel
+        layerProps={{ hostId: layerHostId }}
+        isOpen={isPanelOpen}
+        headerText="Notifications panel"
+        focusTrapZoneProps={{
+          isClickableOutsideFocusTrap: true,
+          forceFocusInsideTrap: false,
+        }}
+        onDismiss={dismissPanel}
+        isLightDismiss={true}
+      >
+        TODO
+      </Panel>
+
       <LayerHost id={layerHostId} className={layerHostClass}>
         {children}
       </LayerHost>
