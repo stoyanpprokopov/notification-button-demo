@@ -2,23 +2,32 @@ import React, { useState } from "react";
 import { RingerIcon } from "@fluentui/react-icons-mdl2";
 import { NOTIFICATIONS_PANEL_CONTAINER_ID } from "./panelUtils";
 import { Panel } from "@fluentui/react";
-import { IEvent } from "../data/events";
+import { IEvent, IEventsProps } from "../data/events";
 import NotificationsList from "./NotificationsList";
 import NotDismissedCounter from "./NotDismissedCounter";
 import eventsTestData from "../data/eventsTestData";
 
-interface INotificationsButtonProps {
-  events: IEvent[];
-}
+interface INotificationsButtonProps extends IEventsProps {}
 
 export default function NotificationsButton({
   events,
+  setEvents,
 }: INotificationsButtonProps) {
   const [isOpen, setOpen] = useState(false);
-  const notDismissedCount = events.filter((event) => !event.dismissed).length;
-  const showCounter = !isOpen && notDismissedCount > 0;
+  const eventsToShow = events.filter((event) => !event.dismissed);
+  const showCounter = !isOpen && eventsToShow.length > 0;
 
-  const onDismiss = (id: string) => {};
+  const onDismiss = (id: string) => {
+    const result = events.map((event) => {
+      if (event.id === id) {
+        return { ...event, dismissed: true };
+      }
+
+      return event;
+    });
+
+    setEvents(result);
+  };
 
   return (
     <div
@@ -52,7 +61,7 @@ export default function NotificationsButton({
           forceFocusInsideTrap: false,
         }}
       >
-        <NotificationsList events={events} />
+        <NotificationsList events={eventsToShow} onDismiss={onDismiss} />
       </Panel>
 
       <RingerIcon

@@ -19,7 +19,7 @@ export default function App() {
         overflow: "hidden",
       }}
     >
-      <Header events={events} />
+      <Header events={events} setEvents={setEvents} />
       <PageContainer>TODO</PageContainer>
     </div>
   );

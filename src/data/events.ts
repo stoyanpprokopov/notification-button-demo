@@ -11,3 +11,8 @@ export interface IEvent {
   status: EEventStatus;
   dismissed: boolean;
 }
+
+export interface IEventsProps {
+  events: IEvent[];
+  setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>;
+}

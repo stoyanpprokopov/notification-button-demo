@@ -1,13 +1,11 @@
 import React from "react";
 import HeaderLogo from "./HeaderLogo";
 import NotificationsButton from "../notifications/NotificationsButton";
-import { IEvent } from "../data/events";
+import { IEvent, IEventsProps } from "../data/events";
 
-interface IHeaderProps {
-  events: IEvent[];
-}
+interface IHeaderProps extends IEventsProps {}
 
-export default function Header({ events }: IHeaderProps) {
+export default function Header({ events, setEvents }: IHeaderProps) {
   return (
     <div
       style={{
@@ -27,7 +25,7 @@ export default function Header({ events }: IHeaderProps) {
         }}
       >
         <HeaderLogo />
-        <NotificationsButton events={events} />
+        <NotificationsButton events={events} setEvents={setEvents} />
       </div>
     </div>
   );

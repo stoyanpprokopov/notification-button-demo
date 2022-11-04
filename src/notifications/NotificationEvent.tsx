@@ -4,9 +4,13 @@ import moment from "moment";
 
 interface INotificationEventProps {
   event: IEvent;
+  onDismiss: (id: string) => void;
 }
 
-export default function NotificationEvent({ event }: INotificationEventProps) {
+export default function NotificationEvent({
+  event,
+  onDismiss,
+}: INotificationEventProps) {
   return (
     <div
       style={{
@@ -18,7 +22,6 @@ export default function NotificationEvent({ event }: INotificationEventProps) {
         alignItems: "left",
         borderBottom: "1px solid #dddddd",
         paddingBottom: "8px",
-        //padding: "8px 12px",
       }}
     >
       <div
@@ -29,6 +32,7 @@ export default function NotificationEvent({ event }: INotificationEventProps) {
           cursor: "pointer",
           fontSize: "16px",
         }}
+        onClick={() => onDismiss(event.id)}
       >
         &#10006;
       </div>
