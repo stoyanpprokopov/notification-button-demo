@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { RingerIcon } from "@fluentui/react-icons-mdl2";
 import { PANEL_CONTAINER_ID } from "./panelUtils";
 import { Panel } from "@fluentui/react";
-import { useBoolean } from "@fluentui/react-hooks";
 
 interface INotificationsButtonProps {}
 
 export default function NotificationsButton({}: INotificationsButtonProps) {
-  const [isPanelOpen, { setTrue: showPanel, setFalse: dismissPanel }] =
-    useBoolean(false);
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <div
@@ -22,18 +20,18 @@ export default function NotificationsButton({}: INotificationsButtonProps) {
         cursor: "pointer",
       }}
       onClick={() => {
-        if (isPanelOpen) {
-          dismissPanel();
+        if (isOpen) {
+          setOpen(false);
         }
 
-        showPanel();
+        setOpen(true);
       }}
     >
       <Panel
         layerProps={{ hostId: PANEL_CONTAINER_ID }}
-        isOpen={isPanelOpen}
+        isOpen={isOpen}
         headerText="Notifications panel"
-        onDismiss={dismissPanel}
+        onDismiss={() => setOpen(false)}
         isLightDismiss={true}
         focusTrapZoneProps={{
           isClickableOutsideFocusTrap: true,
