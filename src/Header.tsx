@@ -1,15 +1,10 @@
 import React from "react";
 import HeaderLogo from "./HeaderLogo";
 import NotificationsButton from "./NotificationsButton";
-import { IPanelControlProps } from "./panelControlProps";
 
-interface IHeaderProps extends IPanelControlProps {}
+interface IHeaderProps {}
 
-export default function Header({
-  isPanelOpen,
-  showPanel,
-  dismissPanel,
-}: IHeaderProps) {
+export default function Header({}: IHeaderProps) {
   return (
     <div
       style={{
@@ -29,11 +24,7 @@ export default function Header({
         }}
       >
         <HeaderLogo />
-        <NotificationsButton
-          isPanelOpen={isPanelOpen}
-          showPanel={showPanel}
-          dismissPanel={dismissPanel}
-        />
+        <NotificationsButton />
       </div>
     </div>
   );
