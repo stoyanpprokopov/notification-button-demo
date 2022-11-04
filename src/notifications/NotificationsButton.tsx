@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { RingerIcon } from "@fluentui/react-icons-mdl2";
-import { PANEL_CONTAINER_ID } from "./panelUtils";
+import { NOTIFICATIONS_PANEL_CONTAINER_ID } from "./panelUtils";
 import { Panel } from "@fluentui/react";
+import { IEvent } from "../data/events";
+import NotificationsList from "./NotificationsList";
+import NotDismissedCounter from "./NotDismissedCounter";
+import eventsTestData from "../data/eventsTestData";
 
-interface INotificationsButtonProps {}
+interface INotificationsButtonProps {
+  events: IEvent[];
+}
 
-export default function NotificationsButton({}: INotificationsButtonProps) {
+export default function NotificationsButton({
+  events,
+}: INotificationsButtonProps) {
   const [isOpen, setOpen] = useState(false);
+  const notDismissedCount = events.filter((event) => !event.dismissed).length;
+  const showCounter = !isOpen && notDismissedCount > 0;
+
+  const onDismiss = (id: string) => {};
 
   return (
     <div
@@ -15,9 +27,11 @@ export default function NotificationsButton({}: INotificationsButtonProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "60px",
+        height: "100%",
         width: "60px",
         cursor: "pointer",
+        backgroundColor: isOpen ? "white" : "transparent",
+        position: "relative",
       }}
       onClick={() => {
         if (isOpen) {
@@ -28,7 +42,7 @@ export default function NotificationsButton({}: INotificationsButtonProps) {
       }}
     >
       <Panel
-        layerProps={{ hostId: PANEL_CONTAINER_ID }}
+        layerProps={{ hostId: NOTIFICATIONS_PANEL_CONTAINER_ID }}
         isOpen={isOpen}
         headerText="Notifications panel"
         onDismiss={() => setOpen(false)}
@@ -38,15 +52,18 @@ export default function NotificationsButton({}: INotificationsButtonProps) {
           forceFocusInsideTrap: false,
         }}
       >
-        TODO
+        <NotificationsList events={events} />
       </Panel>
+
       <RingerIcon
         style={{
           height: "40px",
           width: "40px",
-          color: "white",
+          color: isOpen ? "black" : "white",
         }}
       />
+
+      {showCounter && <NotDismissedCounter count={events.length} />}
     </div>
   );
 }

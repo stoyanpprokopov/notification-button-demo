@@ -4,6 +4,7 @@ export default function HeaderLogo() {
   return (
     <div
       style={{
+        marginLeft: "12px",
         color: "#eeeeee",
         fontSize: "24px",
         fontStyle: "italic",

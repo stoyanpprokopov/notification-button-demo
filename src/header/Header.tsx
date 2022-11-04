@@ -1,14 +1,17 @@
 import React from "react";
 import HeaderLogo from "./HeaderLogo";
-import NotificationsButton from "./NotificationsButton";
+import NotificationsButton from "../notifications/NotificationsButton";
+import { IEvent } from "../data/events";
 
-interface IHeaderProps {}
+interface IHeaderProps {
+  events: IEvent[];
+}
 
-export default function Header({}: IHeaderProps) {
+export default function Header({ events }: IHeaderProps) {
   return (
     <div
       style={{
-        minHeight: "80px",
+        height: "80px",
         width: "100%",
         backgroundColor: "#2f3844",
       }}
@@ -20,11 +23,11 @@ export default function Header({}: IHeaderProps) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "10px 8px",
+          height: "100%",
         }}
       >
         <HeaderLogo />
-        <NotificationsButton />
+        <NotificationsButton events={events} />
       </div>
     </div>
   );

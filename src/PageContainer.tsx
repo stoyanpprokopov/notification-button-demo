@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { LayerHost, ILayerProps } from "@fluentui/react/lib/Layer";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
-import { PANEL_CONTAINER_ID } from "./panelUtils";
+import { NOTIFICATIONS_PANEL_CONTAINER_ID } from "./notifications/panelUtils";
 
 interface IPageContainerProps {
   children: any;
@@ -21,7 +21,7 @@ export default function PageContainer({
       {...props}
     >
       <LayerHost
-        id={PANEL_CONTAINER_ID}
+        id={NOTIFICATIONS_PANEL_CONTAINER_ID}
         className={mergeStyles({
           position: "relative",
           height: "100%",
