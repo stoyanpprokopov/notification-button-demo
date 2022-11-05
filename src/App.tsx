@@ -18,7 +18,6 @@ export default function App() {
   useEffect(() => {
     // Simulate work
     const timer = setInterval(() => {
-      console.log("Worker works...");
       setEvents((events) => {
         const result = events.map((event) => {
           if (event.status === EEventStatus.IDLE) {
