@@ -29,6 +29,17 @@ export default function NotificationsButton({
     setEvents(result);
   };
 
+  const dismissAll = (eventIds: string[]) => {
+    const result = events.map((event) => {
+      if (eventIds.includes(event.id)) {
+        return { ...event, dismissed: true };
+      }
+      return event;
+    });
+
+    setEvents(result);
+  };
+
   return (
     <div
       style={{
@@ -54,14 +65,21 @@ export default function NotificationsButton({
         layerProps={{ hostId: NOTIFICATIONS_PANEL_CONTAINER_ID }}
         isOpen={isOpen}
         headerText="Notifications panel"
-        onDismiss={() => setOpen(false)}
+        onDismiss={() => {
+          setOpen(false);
+          dismissAll(eventsToShow.map((event) => event.id));
+        }}
         isLightDismiss={true}
         focusTrapZoneProps={{
           isClickableOutsideFocusTrap: true,
           forceFocusInsideTrap: false,
         }}
       >
-        <NotificationsList events={eventsToShow} onDismiss={onDismiss} />
+        <NotificationsList
+          events={eventsToShow}
+          onDismiss={onDismiss}
+          onDismissAll={() => dismissAll(eventsToShow.map((event) => event.id))}
+        />
       </Panel>
 
       <RingerIcon

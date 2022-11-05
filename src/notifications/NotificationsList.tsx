@@ -5,11 +5,13 @@ import NotificationEvent from "./NotificationEvent";
 interface INotificationsListProps {
   events: IEvent[];
   onDismiss: (id: string) => void;
+  onDismissAll: () => void;
 }
 
 export default function NotificationsList({
   events,
   onDismiss,
+  onDismissAll,
 }: INotificationsListProps) {
   return (
     <div
@@ -29,6 +31,7 @@ export default function NotificationsList({
               cursor: "pointer",
               color: "blue",
             }}
+            onClick={() => onDismissAll()}
           >
             Dismiss All
           </div>
