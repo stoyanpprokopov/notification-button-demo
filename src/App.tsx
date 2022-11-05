@@ -12,7 +12,7 @@ initializeIcons();
 const WORKER_TIME = 5000;
 
 export default function App() {
-  let timer: any;
+  let timer: NodeJS.Timer;
   const [events, setEvents] = useState<IEvent[]>(eventsTestData);
 
   useEffect(() => {

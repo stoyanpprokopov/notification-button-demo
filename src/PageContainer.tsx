@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { LayerHost, ILayerProps } from "@fluentui/react/lib/Layer";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
 import { NOTIFICATIONS_PANEL_CONTAINER_ID } from "./notifications/panelUtils";
 
 interface IPageContainerProps {
-  children: any;
+  children: ReactElement | ReactElement[] | ReactNode;
 }
 
 export default function PageContainer({

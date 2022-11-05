@@ -4,7 +4,16 @@ import TextField from "./TextField";
 import { FormSpy, useForm } from "react-final-form";
 
 interface INotificationFormProps {
-  handleSubmit: any;
+  handleSubmit: (
+    event?:
+      | Partial<
+          Pick<
+            React.SyntheticEvent<Element, Event>,
+            "preventDefault" | "stopPropagation"
+          >
+        >
+      | undefined
+  ) => Promise<any> | undefined;
   submitting?: boolean;
 }
 
