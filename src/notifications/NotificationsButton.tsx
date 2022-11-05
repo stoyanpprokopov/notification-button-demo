@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { RingerIcon } from "@fluentui/react-icons-mdl2";
-import { NOTIFICATIONS_PANEL_CONTAINER_ID } from "./panelUtils";
+import {
+  NOTIFICATIONS_BUTTON_ID,
+  NOTIFICATIONS_PANEL_CONTAINER_ID,
+} from "./panelUtils";
 import { Panel } from "@fluentui/react";
 import { IEvent, IEventsProps } from "../data/events";
 import NotificationsList from "./NotificationsList";
 import NotDismissedCounter from "./NotDismissedCounter";
-import eventsTestData from "../data/eventsTestData";
 
 interface INotificationsButtonProps extends IEventsProps {}
 
@@ -42,6 +44,7 @@ export default function NotificationsButton({
 
   return (
     <div
+      id={NOTIFICATIONS_BUTTON_ID}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -90,7 +93,7 @@ export default function NotificationsButton({
         }}
       />
 
-      {showCounter && <NotDismissedCounter count={events.length} />}
+      {showCounter && <NotDismissedCounter count={eventsToShow.length} />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { EEventStatus, IEvent } from "../data/events";
 import moment from "moment";
+import NotificationEventHeader from "./NotificationEventHeader";
 
 interface INotificationEventProps {
   event: IEvent;
@@ -36,32 +37,11 @@ export default function NotificationEvent({
       >
         &#10006;
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          fontSize: "16px",
-          fontWeight: 600,
-        }}
-      >
-        {event.status === EEventStatus.IN_PROGRESS && <div>...</div>}
-        {event.status === EEventStatus.COMPLETED && <div>✓</div>}
-        <div
-          style={{
-            marginLeft: "16px",
-            color: event.status === EEventStatus.COMPLETED ? "green" : "black",
-          }}
-        >
-          {event.title}
-        </div>
-      </div>
-      <div
-        style={{
-          marginTop: "10px",
-        }}
-      >
-        {event.description}
-      </div>
+      <NotificationEventHeader
+        status={event.status}
+        title={event.title}
+        description={event.description}
+      />
       <div
         style={{
           marginTop: "12px",
