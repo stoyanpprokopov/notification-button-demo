@@ -6,7 +6,6 @@ import {
   IEvent,
   IEventsProps,
 } from "../data/events";
-import { simulateWork } from "../data/simulateWork";
 import EventCreatedCallout from "./EventCreatedCallout";
 import NotificationForm from "./NotificationForm";
 
@@ -37,20 +36,6 @@ export default function AddNotificationForm({
           setEvents([...events, newEvent]);
           setCreatedEvent(newEvent);
           setShowCallout(true);
-
-          /*
-          await simulateWork(() => {
-            const result = events.map((event) => {
-              if (event.id === newEvent.id) {
-                return { ...event, status: EEventStatus.COMPLETED };
-              }
-
-              return event;
-            });
-            console.log("Worker finished: ", result);
-            setEvents(result);
-          });
-          */
         }}
         subscription={{
           submitting: true,

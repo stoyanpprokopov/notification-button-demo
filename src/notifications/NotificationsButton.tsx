@@ -4,8 +4,8 @@ import {
   NOTIFICATIONS_BUTTON_ID,
   NOTIFICATIONS_PANEL_CONTAINER_ID,
 } from "./panelUtils";
-import { Panel } from "@fluentui/react";
-import { IEvent, IEventsProps } from "../data/events";
+import { mergeStyles, Panel, ProgressIndicator } from "@fluentui/react";
+import { EEventStatus, IEvent, IEventsProps } from "../data/events";
 import NotificationsList from "./NotificationsList";
 import NotDismissedCounter from "./NotDismissedCounter";
 
@@ -15,9 +15,13 @@ export default function NotificationsButton({
   events,
   setEvents,
 }: INotificationsButtonProps) {
-  const [isOpen, setOpen] = useState(false);
+  const [isPanelOpen, setPanelOpen] = useState(false);
   const eventsToShow = events.filter((event) => !event.dismissed);
-  const showCounter = !isOpen && eventsToShow.length > 0;
+  const showCounter = !isPanelOpen && eventsToShow.length > 0;
+
+  const showProgressIndicator =
+    eventsToShow.filter((event) => event.status !== EEventStatus.COMPLETED)
+      .length > 0;
 
   const onDismiss = (id: string) => {
     const result = events.map((event) => {
@@ -53,23 +57,23 @@ export default function NotificationsButton({
         height: "100%",
         width: "60px",
         cursor: "pointer",
-        backgroundColor: isOpen ? "white" : "transparent",
+        backgroundColor: isPanelOpen ? "white" : "transparent",
         position: "relative",
       }}
       onClick={() => {
-        if (isOpen) {
-          setOpen(false);
+        if (isPanelOpen) {
+          setPanelOpen(false);
         }
 
-        setOpen(true);
+        setPanelOpen(true);
       }}
     >
       <Panel
         layerProps={{ hostId: NOTIFICATIONS_PANEL_CONTAINER_ID }}
-        isOpen={isOpen}
+        isOpen={isPanelOpen}
         headerText="Notifications panel"
         onDismiss={() => {
-          setOpen(false);
+          setPanelOpen(false);
           dismissAll(eventsToShow.map((event) => event.id));
         }}
         isLightDismiss={true}
@@ -85,13 +89,29 @@ export default function NotificationsButton({
         />
       </Panel>
 
-      <RingerIcon
-        style={{
-          height: "40px",
-          width: "40px",
-          color: isOpen ? "black" : "white",
-        }}
-      />
+      {!showProgressIndicator && (
+        <RingerIcon
+          style={{
+            height: "40px",
+            width: "40px",
+            color: isPanelOpen ? "black" : "white",
+          }}
+        />
+      )}
+
+      {showProgressIndicator && (
+        <ProgressIndicator
+          label={
+            <RingerIcon
+              style={{
+                height: "40px",
+                width: "40px",
+                color: isPanelOpen ? "black" : "white",
+              }}
+            />
+          }
+        />
+      )}
 
       {showCounter && <NotDismissedCounter count={eventsToShow.length} />}
     </div>
