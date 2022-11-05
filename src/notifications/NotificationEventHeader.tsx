@@ -19,8 +19,6 @@ export default function NotificationEventHeader({
         style={{
           display: "flex",
           flexDirection: "row",
-          fontSize: "16px",
-          fontWeight: 600,
         }}
       >
         {status === EEventStatus.IN_PROGRESS && (
@@ -33,10 +31,19 @@ export default function NotificationEventHeader({
         {status === EEventStatus.COMPLETED && (
           <div
             style={{
-              color: status === EEventStatus.COMPLETED ? "green" : "black",
+              color: "green",
             }}
           >
             ✓ {title} is completed
+          </div>
+        )}
+        {status === EEventStatus.IDLE && (
+          <div
+            style={{
+              color: "orange",
+            }}
+          >
+            {title} is starting...
           </div>
         )}
       </div>

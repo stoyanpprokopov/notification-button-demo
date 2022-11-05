@@ -1,8 +1,10 @@
 import { Callout, DelayedRender, mergeStyleSets, Text } from "@fluentui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { IEvent } from "../data/events";
 import NotificationEventHeader from "../notifications/NotificationEventHeader";
 import { NOTIFICATIONS_BUTTON_ID } from "../notifications/panelUtils";
+
+const CLOSE_CALLOUT_DELAY = 3000;
 
 interface IEventCreatedCalloutProps {
   event: IEvent;
@@ -13,6 +15,10 @@ export default function EventCreatedCallout({
   event,
   setShowCallout,
 }: IEventCreatedCalloutProps) {
+  useEffect(() => {
+    setTimeout(() => setShowCallout(false), CLOSE_CALLOUT_DELAY);
+  }, []);
+
   return (
     <Callout
       className={styles.callout}

@@ -27,7 +27,7 @@ const eventsTestData = [
     description:
       "33 3333 33333333 33 3 3333 33 3333 33333333 33 3 3333 33 3333 33333333 33 3 333 ",
     dateCreated: moment("2022-11-01").toDate(),
-    status: EEventStatus.IN_PROGRESS,
+    status: EEventStatus.IDLE,
     dismissed: false,
   },
 ];

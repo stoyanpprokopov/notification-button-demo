@@ -1,6 +1,7 @@
 import moment from "moment";
 
 export enum EEventStatus {
+  IDLE = "IDLE",
   IN_PROGRESS = "IN_PROGRESS",
   COMPLETED = "COMPLETED",
 }
@@ -25,7 +26,7 @@ export function createEvent(title: string, description: string): IEvent {
     title,
     description,
     dateCreated: new Date(),
-    status: EEventStatus.IN_PROGRESS,
+    status: EEventStatus.IDLE,
     dismissed: false,
   };
 }
