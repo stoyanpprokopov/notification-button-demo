@@ -5,6 +5,7 @@ import { initializeIcons } from "@fluentui/react/lib/Icons";
 import { useState } from "react";
 import { IEvent } from "./data/events";
 import eventsTestData from "./data/eventsTestData";
+import AddNotificationForm from "./form/AddNotificationForm";
 
 initializeIcons();
 
@@ -20,7 +21,9 @@ export default function App() {
       }}
     >
       <Header events={events} setEvents={setEvents} />
-      <PageContainer>TODO</PageContainer>
+      <PageContainer>
+        <AddNotificationForm events={events} setEvents={setEvents} />
+      </PageContainer>
     </div>
   );
 }
